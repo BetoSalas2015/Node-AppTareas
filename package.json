@@ -1,0 +1,27 @@
+{
+  "name": "apptareas",
+  "version": "0.1.0",
+  "description": "Aplicación de Consola Interactiva de tareas (to-do)",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BetoSalas2015/Node-AppTareas.git"
+  },
+  "keywords": [
+    "node",
+    "javascript"
+  ],
+  "author": "Roberto Salazar Márquez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BetoSalas2015/Node-AppTareas/issues"
+  },
+  "homepage": "https://github.com/BetoSalas2015/Node-AppTareas#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "inquirer": "^9.1.4"
+  }
+}
