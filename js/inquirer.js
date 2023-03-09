@@ -66,6 +66,29 @@ const capturaEntrada = async(message) => {
     return respuesta.resp;
 };
 
+const listadoTareasBorrar = async(listado = []) => {
+    let cont = 0;
+
+    const choices = listado.map( (tarea) => {
+        cont++;
+        return {
+            value: tarea.id, 
+            name: `${cont.toString().green}. ${tarea.desc.white}`
+        }
+    });
+    choices.unshift({
+        value: 0,
+        name: `${'0'.green}. ${'Cancelar'.yellow}`
+    });
+    const respuesta = await inquirer.prompt([{
+        type: 'list',
+        name: 'resp',
+        message: '¿Que tarea desea borrar?',
+        choices 
+    }]);
+    return respuesta.resp;
+};
+
 const pausa = async() => {
     await inquirer.prompt( [ {
         type: 'input',
@@ -74,8 +97,19 @@ const pausa = async() => {
     } ] );
 };
 
+const confirmar = async(message) => {
+    const { ok } = await inquirer.prompt([{
+        type: 'confirm',
+        name: 'ok',
+        message
+    }]);
+    return ok;
+};
+
 module.exports = {
     inquirerMenu,
     pausa,
-    capturaEntrada
+    capturaEntrada,
+    listadoTareasBorrar,
+    confirmar
 }

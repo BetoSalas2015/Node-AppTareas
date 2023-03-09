@@ -1,5 +1,9 @@
 const colors = require('colors');
-const { inquirerMenu, pausa, capturaEntrada } = require('./js/inquirer');
+const { inquirerMenu, 
+        pausa, 
+        capturaEntrada, 
+        listadoTareasBorrar, 
+        confirmar } = require('./js/inquirer');
 const Tareas = require('./Modelos/tareas');
 const { guardabase, cargaBase } = require('./js/guardabase');
 
@@ -20,7 +24,18 @@ const main = async () => {
                 const resp = await capturaEntrada('Descripción: ');
                 tareas.crearTarea(resp);  
                 break;
-            case 2: console.log(tareas.listadoArr);  break;
+            case 2: tareas.imprimeTareas();  break;
+            case 3: tareas.imprimePendientesCompletadas(true); break;
+            case 4: tareas.imprimePendientesCompletadas(false); break;
+            case 6: const id = await listadoTareasBorrar(tareas.listadoArr); 
+                    if(id === 0) break;
+                    const ok = await confirmar('¿Desea Borrar la tarea?');
+                    if (ok) {
+                        tareas.borrarTarea(id);
+                        console.log('Tarea Borrada.'.green);
+                    }
+                    break;
+            
         
         }
         guardabase(tareas.listadoArr);
