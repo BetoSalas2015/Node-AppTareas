@@ -66,6 +66,23 @@ const capturaEntrada = async(message) => {
     return respuesta.resp;
 };
 
+const listadoSeleccionar = async(listado) => {
+    const choices = listado.map( (tarea) => {
+        return {
+            value: tarea.id,
+            name: tarea.desc,
+            checked: (tarea.completado) ? false : true   
+        }
+    });
+    const respuesta = await inquirer.prompt([{
+        type: 'checkbox',
+        name: 'resp',
+        message: 'Marque las tareas completadas',
+        choices
+    }]);
+    return respuesta.resp
+};
+
 const listadoTareasBorrar = async(listado = []) => {
     let cont = 0;
 
@@ -111,5 +128,6 @@ module.exports = {
     pausa,
     capturaEntrada,
     listadoTareasBorrar,
-    confirmar
+    confirmar,
+    listadoSeleccionar
 }
